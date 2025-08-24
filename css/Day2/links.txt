@@ -1,0 +1,12 @@
+https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+https://animate.style/
+https://www.w3schools.com/cssref/atrule_keyframes.php
+https://www.w3schools.com/cssref/tryit.php?filename=trycss3_keyframes2
+
+cdn font aswoem ==> https://cdnjs.com/libraries/font-awesome
+https://fontawesome.com/
+
+https://www.w3schools.com/cssref/tryit.php?filename=trycss3_transform
+
+https://www.w3schools.com/css/css3_flexbox_items.asp
+https://developer.mozilla.org/en-US/docs/Web/CSS/transition

@@ -1,0 +1,66 @@
+https://laravel.com/docs/11.x/starter-kits ===> breez
+install ===> you must install nodejs
+https://nodejs.org/en/download
+=======> open cmd ===> node --version
+=======> open cmd ===> npm --version  ==> if it not found
+npm install  ==> npm install -g npm@latest
+=======================================
+composer require laravel/breeze --dev
+php artisan breeze:install   ====> blade , yes , no
+php artisan migrate
+npm install  ==> npm install -g npm@latest
+npm run dev
+===========================>
+open new command prompt in your project ==> php artisan serve 
+*******************************************************************************************************
+
+Hyper ui ====> https://www.hyperui.dev/
+
+npm install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+===================>
+tailwind.config.js  ==> file should be
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+
+/** @type {import('tailwindcss').Config} */
+export default {
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+        './resources/js/**/*.js', // ⬅️ for Alpine.js or other interactivity
+        './resources/**/*.html',  // ⬅️ if you use raw HTML files
+    ],
+
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+
+    plugins: [
+        forms, // ⬅️ default form styling
+        // You can add more plugins like typography or line-clamp here if needed
+    ],
+};
+=======================>
+command  ==> npm install alpinejs
+
+========================================
+
+// middle were   ====> 
+====> login , register 
+============================================>
+
+// api   ====>   mobile application (flutter)==>       api  (link)              <==  laravel
+
+api ===> link ==> return data ==> routes ==> file with api ==> php artisan install:api
+generate link ==> can used ==> 
+
+
+===> api ==> download postman===>https://www.postman.com/downloads/
+===============================================>

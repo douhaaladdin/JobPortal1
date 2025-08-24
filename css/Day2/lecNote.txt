@@ -1,0 +1,92 @@
+====> position
+top
+bottom
+left
+right
+/**
+
+static ====> default
+relative==>
+width: 100%
+move : its position 
+  االعنصر بيتحرك بالنسبه للمكان اللي هو موجود فيه
+العنصر بيحتفظ بالعرض بتاعه يعني مش هيكون ع قد المحتوي 
+كمان بيحتفظ بمكانه 
+absolute =====..>
+width : content
+move : parent: any postion expect static : move depend on parent 
+parent : static ===> body ==> لاقرب parent  واخد position غير static
+
+fixed  ===> 
+width: content
+fixed : don't move if their scroll
+move : view port (screen, body)
+sticky:
+width:100%
+move : parent ===> top 30 ==> screen
+parent ==> hidden , element : hidden
+========================================
+===> Css Variables
+variables ==> :root{
+    --variablename:value
+}
+
+p{
+    color:var(--variablename)
+}
+=====================>
+box-shadow
+      h-offset(البعد عن محور x)
+      v-offset(البعد عن محور y)
+      blur 
+      spread
+      color
+    box-shadow: 5px 5px 20px 5px black;
+==================>
+text-shadow: 
+ h-offset(البعد عن محور x)
+      v-offset(البعد عن محور y)
+      blur
+         color 
+text-shadow: 5px 5px 5px red;
+
+
+
+====================>
+css units
+===> em ==> 16x 
+, rem  ==> root
+, px ,
+========>
+percentage : 30%==> parent
+
+======>
+screen
+ VH ==> view port height
+VW==> view port width
+==================>
+
+===> flex
+
+===> flex-start==> left
+===> flex-end==> right
+center
+space-between
+space-around
+space-evenly
+
+justify content ===> direction
+align-items ==> x (row) ===> y 
+               y(columns)===> x
+baseline========> 
+
+
+
+
+
+=====================>
+flex : 
+1-parent  <div.parent> <div.child>
+2-child ==> parent(display:flex) ==>
+chlid ===> order , align-self
+

@@ -1,0 +1,88 @@
+html ===> editor ==> vs ==> https://code.visualstudio.com/download
+html ===> name.html 
+
+html ==> hyper text markup language ===> structure 
+
+html ==> tag ==> <> ===> self closed tag , closed tag 
+tag
+<> closed tag  </>   ===> <p> content </p>
+
+<>   ==> self closed tag   ==> <img >
+
+tag ==> attributes  ==> name , width , height 
+attributes  ==> tag , ==> img ==> src 
+                      ==> a ==> href
+
+
+ ==============================
+html 
+ head    ===> tag closed    ===> setting website ==> meta 
+ meta tag   ==> SEO ===> Search Engine Optimization
+ ==> <meta name="description" content="day1 for html ">
+ body    ===> tag closed   ===> 
+
+
+ ======================>
+ html 
+ versions ==>   html:5
+
+
+ =====================> run 
+
+
+ headers ====> h1 (main===> logo) ==>   ===> h6
+
+ paragraph ==> <p>  </p>
+
+
+
+ ==========< deprecated ====> canesled
+
+
+ comment ===>   
+ 
+ 
+<!--  comment
+ 
+ kdskjkds
+ jsdffjhdjs,hgj
+ shdfhsdkf
+  -->
+
+
+
+  list ===> ordered list   ===> 1  , b
+  list ===> un ordered list  ==> circle , square
+  list ===> description list  ===> item ==> description
+
+
+  =================>
+  form ===> (inputs) move data 
+  input : text
+  input : passord
+  input : button
+  input : checkbox
+  input : radio button
+  input : color
+  input : file
+
+
+  ======================> 
+  table ===> row , col
+thead ====> colName (headers) , tbody===> Data  , tfoot
+colspan  : more column 
+rowspan  : more row
+
+
+
+==========================>
+website 
+head   ===> navbar
+body   ==> content  ==> sidebar , article , content
+footer ===> end of site
+=================================>
+
+container ===>
+ div   ===> block elemnt   ==>  width , table , list
+ h1=> h6 , 
+ span  ==> inline element  ==>  content  => img , link

@@ -1,0 +1,17 @@
+.nav{
+    background-color: rgb(238, 200, 150);
+}
+
+.nav-item{
+    float:right;
+    margin: 20px;
+    list-style: none;
+}
+
+.left{
+    float: left;
+}
+.clear{
+    clear: both;
+}
+

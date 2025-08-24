@@ -1,0 +1,331 @@
+/* *{
+    padding: 0;
+    margin: 0;
+} */
+
+/* :root{
+    --main-color:red;
+    --main-text-famliy:'Courier New', Courier, monospace;
+} */
+
+/* .parent{
+    background-color: bisque;
+    padding: 10px;
+    width: 400px;
+    height: 300px; */
+   
+    /* height: 500px; */
+    /* margin: auto; */
+    /* position: sticky; */
+    /* position: relative; */
+/* } */
+
+/* .child1{
+    color: white;
+    margin: 3px;
+    
+    background-color: teal;
+    position: absolute;
+    left:5px;
+   
+} */
+
+/* .child2{
+    color: white;
+    margin: 3px;
+    position: absolute;
+    top:20px;
+    left:40px; */
+    /* width: 30%; */
+    /* position: relative;
+  right: 10px; 
+   top: 20px;  */
+   /* position : absolute;
+  left:50%;
+  top:50%; */
+   /* bottom:0px; */
+
+
+   /* position: fixed;
+   top:5px;
+  right: 10px;
+  width: 100%; */
+
+  /* position: sticky;
+  top: 30px; */
+
+    
+    /* background-color: brown;
+}
+
+.child3{
+    position: absolute;
+    color: white;
+    margin: 3px;
+    top:60px;
+    left:80px;
+    background-color: blueviolet;
+} */
+
+
+/* .test{
+    background-color: gainsboro;
+    height: 50px;
+    width: 50px;
+    margin: 40px;
+          
+    box-shadow: 5px 5px 20px 5px black;
+}
+.test p{
+    display: none;
+    color: white;
+  
+} */
+/* .test:hover p{
+   display: block;
+   text-align: center;
+   /* color: var(--main-color); */
+   /* font-family: var(--main-text-famliy);
+   margin: 5px; */
+      
+
+/* } */ 
+/* p{
+    color:green;
+    font-size: 30px;
+     text-shadow: 5px 5px 5px red;
+     margin: 20px;
+} */
+
+
+/* .parent-flex{
+    display: flex;
+    gap: 15px;
+    height: 200px;
+    background-color: black; */
+
+    /* flex-direction: column; */
+    /**y*/
+    /* justify-content:center; */
+    /**x*/ 
+    /* align-items: center ; */
+/* } */
+/* .flex-item1{ */
+ /* gap: 15px; */
+/* width: 30%;
+height: 20px;
+    background-color: teal;
+    order: 2;
+    align-self: flex-end;
+} */
+/* .flex-item2{
+    order: 3;
+    width: 30%;
+  height: 20px;
+    background-color: bisque;
+
+}
+.flex-item3{
+    order: 1;
+    width: 30%;
+    height: 20px;
+    background-color: brown;
+}
+
+div.test-flex{
+height: 100px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 10px;
+width: 100px;
+background-color: black;
+} */
+
+/* img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+} */
+
+
+/* .container{
+    display: flex;
+    justify-content: center;
+   
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: bisque;
+    border: 1px solid gray;
+    border-radius:5px ;
+    -webkit-border-radius:5px ;
+    -moz-border-radius:5px ;
+    -ms-border-radius:5px ;
+    -o-border-radius:5px ;
+}
+
+.card{
+    width: 30%;
+    border: 1px solid rgb(147, 141, 141);
+    border-radius:10px ;
+    -webkit-border-radius:10px ;
+    -moz-border-radius:10px ;
+    -ms-border-radius:10px ;
+    -o-border-radius:10px ;
+ 
+}
+.card div {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card img{
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+} */
+
+/* .test-animation{
+    width: 50%;
+    height:50px;
+    background-color: black;
+    transition: all ;
+    transition-duration:3s ;
+    transition-timing-function: ease-in-out;
+    transition-delay: .5s;
+    transition:all 30ms ease-in-out 10s;
+    -webkit-transition:all 30ms ease-in-out 10s;
+    -moz-transition:all 30ms ease-in-out 10s;
+    -ms-transition:all 30ms ease-in-out 10s;
+    -o-transition:all 30ms ease-in-out 10s;
+} */
+/* .test-animation:hover{
+    background-color: brown;
+    color: white;
+    width: 100%;
+    text-align: center;
+} */
+
+/* div{
+    background-color: brown;
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    text-align: center;
+    transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+
+}
+div:hover{
+   
+    background-color: beige;
+    
+} */
+
+/* div.test-transform{
+   background-color: yellow;
+   width: 50px;
+   height: 50px;
+   align-items: center;
+   margin: 100px;
+   transform: translate(100px,70px);
+   transform:rotate(360deg) ;
+   transform: scale(10,3);
+   transform: skew(20deg,30deg);
+   -webkit-transform: scale(10,3);
+   -moz-transform: scale(10,3);
+   -ms-transform: scale(10,3);
+   -o-transform: scale(10,3);
+} */
+
+/* .test-asoewm{
+    position: relative;
+     width: 100px;
+     height: 100px;
+     background-color: bisque;
+     text-align: center;
+     /* margin: 50px; */
+     /* font-size: 50px;
+} */ 
+/* .test-asoewm:hover i{
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+} */
+
+.test-asoewm{
+    position: absolute;
+     width: 100px;
+     height: 100px;
+     background-color: bisque;
+     text-align: center;
+   margin: 100px;
+}
+.test-asoewm div {
+     transition: all 1s ease-in-out;
+    position: absolute;
+    /* opacity: 0; */
+    width:  0%;
+   /* top: 100%; */
+   left: 100%;
+    /* width: 100%; */
+    
+}
+
+div img{
+    width: 100%;
+    height: 100%;
+}
+.test-asoewm:hover div{
+/* opacity: 1; */
+left: 0%;
+width: 100%;
+}
+
+div.animate {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: relative;
+  animation: mymove 5s infinite;
+}
+/* 
+@keyframes mymove {
+  0%   {
+    top: 0px;
+    transform: translate(10px,50px);
+    -webkit-transform: translate(10px,50px);
+    -moz-transform: translate(10px,50px);
+    -ms-transform: translate(10px,50px);
+    -o-transform: translate(10px,50px);
+}
+  25%  {top: 200px;}
+  75%  {top: 50px}
+  100% {top: 100px;}
+} */
+
+@keyframes mymove {
+  from   {
+    top: 0px;
+    transform: translate(10px,50px);
+    -webkit-transform: translate(10px,50px);
+    -moz-transform: translate(10px,50px);
+    -ms-transform: translate(10px,50px);
+    -o-transform: translate(10px,50px);
+}
+  to  {top: 200px;}
+
+}

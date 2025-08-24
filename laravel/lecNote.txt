@@ -1,0 +1,193 @@
+===> laravel Day 1
+laravel ===> php framework ===> files , packges 
+laravel ===> problems in php 
+
+
+==============> 
+php ==> front , back ===> edit 
+php ==> connection ===> 
+edit ==> db 
+php ==> code not dynamic
+
+=======================> solutions 
+design pattern (logic we use to solve problem )==> MVC ==> MODEL VIEW CONTROLLER
+
+
+===> model ==> db
+===> View ==< Front user can handele with it
+Contrller ===> logic of all functions
+
+
+================> Connection 
+design pattern ==> sigletone design pattern ==> pattern ==> u can take one object from DB
+
+==================================================> Handle Code With laravel
+==> code editor ==> vs code 
+===> packge manager ==> composer ==> https://getcomposer.org/download/
+
+===> laravel project ==>   api ===>   fullter ==> mobile ==> link            laravel===> api (DB) ==> link
+====> full stack web application ===> front , Back 
+PHP ==> https://windows.php.net/download#php-8.4
+
+============> install project from laravel 
+projectName
+1=>(for evry time you want to create project  ) composer create-project laravel/laravel:^11.0  projectName
+2=>
+ (only one time )composer global require laravel/installer
+
+(for evry time you want to create project  ) laravel:^11.0  new projectName
+
+======================> 
+laravel ==>commands ==> tool ==> artisan
+
+run project ==> cd projectName
+===============> php artisan serve
+
+
+=======================> Cycle of Project 
+1= user send request by URL in Browser 
+===> url ==> Routes(web.php)  ==> check if route already exist or not
+==>(route) not exit  ==> 404 Not Found 
+==> (route) exist ====> callBack Function  ==> return (text , array) 
+
+==============================================>  ==> return (view)==> (resources==> view)=> show(viewName) 
+==> (route) exist ====> controller  ==>logic in controller ==> execute
+
+@dump ==> vardump ==> display data ==> array
+@dd===> dump and die ==> vardump exit  ===> show data ==> exit
+
+===================> blade engine ===> html ===> u can write code php====> diretives ==> @if , @else ,@for
+
+
+===================>
+stop run of project ==> ctrl+c
+
+========================================> Project laravel ==> install from github
+
+==> git clone link 
+cd project_Laravel_Name
+composer install 
+php artisan key:generate
+php artisan serve
+=======================================
+Day 2
+/**
+ * MVC ==> DB: model  ==> php artisan make:model Student =>https://laravel.com/docs/11.x/eloquent
+ * ==============> Connection ==> model , DB ==> model مفرد table جمع   == > same Name
+ * Logic ==> Controller  ===> Function
+ * =========> Create Controller ==> php artisan make:controller StudentsController
+ *
+ *
+ *
+ * FRont ==> View
+ *
+ *
+ * Routes ==> URL ==> Request
+ * get Data==> get
+ * Send Data==> post
+ * Update data ==> put
+ * Delete Data ==> delete
+ *
+ * =========================> Resource ===> generate all functions in controller
+ * =========> php artisan make:controller TrackController -r
+ * ===> create model ==> controller => resource
+ * 1- create model ==> php artisan make:model Track
+ * 2- ===> create controller ==> php artisan make:controller TrackController --model=Track -r
+ *
+ * ===============================================================>
+ * create model + create controller + resource
+ * php artisan make:model Track -c -r  ===> -c:controller , -r: resource
+ *
+ *
+ * ==================================
+ * 419 ==> page expired ====>
+ * delete ===> change on data ===> access
+ * token ===> input : hidden ==> password
+ */
+ ===============================================
+
+
+
+Day3
+// cruds ==> create , edit 
+======>  
+Button ==> edit 
+====> view ==> form ==> edit on data 
+=====> function ===> return form
+=====> function ===> select data on form ==> edit
+
+Button==> create
+==> ====> view ==> form ==>  create data
+=====> function ===> return form
+=====> function ===> select data on form ==> create
+
+
+======================>     Acess Data 
+fillable   ===> data can be access
+guarde ==?>
+
+
+1- route =====> 2 route
+2- controller ==> 2 function
+3- view ==> form
+
+===============================  Component ==> https://laravel.com/docs/11.x/blade#components
+// component   ====> file ==> code ===> can be used in any way
+===> navbar ====> file ===> reuse
+
+php artisan make:component Button
+
+====================================================================>
+tables ===> 
+// migrations  ===> structure of tables
+1- create migrations==>php artisan make:migration create_students_table  ==> add table
+1- create migrations==>php artisan make:migration add_phone_to_students_table  ==> add column to table
+
+==========> run migrations ==> php artisan migrate
+==> rollback on step ==>php artisan migrate:rollback
+==> rollback on patch ==>php artisan migrate:rollback --patch=2
+==> rollback on steps ==>php artisan migrate:rollback --steps=2
+
+=====================================> Day4
+====> fake data ===> dumy data 
+seeder ==> https://laravel.com/docs/11.x/seeding#writing-seeders
+make seeder ==>  php artisan make:seeder StudentSeeder
+
+
+factory=>php artisan make:seeder StudentFactory --model=Student   ==>https://laravel.com/docs/11.x/eloquent-factories#introduction
+factory ==> generate fake data ==> fake->name()
+seeder ==> seed data that u make in factory in your db 
+php artisan db:seed --class=StudentSeeder
+
+=============
+pagination   ==> app service privder ==> use
+===> function in controller u want to use 
+
+==========================>
+valiadtion errors ===========> https://laravel.com/docs/11.x/validation#main-content
+
+===============> 
+realation between tables =one to many , one to one , many to many
+one to many ==> pk from on one and put in many
+many to many ==> generate new table ==> pk of two tables ==> paviot table
+one to one  ==> total ==> mandatory ==> generate new table ==> pk of two tables ==> paviot table
+one to one  ==> total ==> mandatory ==> pk of any one put in another table
+one to one  ==> total ==> mandatory ==> pk of any one put in another table
+one to one  ==> two partial ==>two  not mandatory ==> generate new table ==> pk of two tables ==> paviot table
+
+
+====================>
+generate track controller ==> model , seeder , factory
+php artisan make:model Track --all
+=======================================>
+relation => track & student 
+
+track             student   =============> migration 
+   1                  1
+   1                 m
+
+   pk ==> 1  put ==> table (many)
+   table ==> student ===> id of track     
+
+
+   ================> relation to show data ===> model      

@@ -1,0 +1,81 @@
+css===> cascading style sheet 
+design ==> color , BG , font 
+
+
+inline style ===> tag
+internal style
+
+<style>  // head
+</style>
+
+external style ==> fileCss 
+namefile.css ==>style.css
+
+periority ==> inline style
+external , internal ==> order
+
+
+
+============>
+select ==> css selectors 
+tag name ==> p 
+class ==> .className ==> .test
+id===> unique ==> #idName=>#p1
+golbal selector ==> *
+===========>
+selector specifity==>
+tag ==> 1 =>Selector Specificity: (0, 0, 1)
+class=>(10)Selector Specificity: (0, 1, 0)
+ID=>(100)Selector Specificity: (1, 0, 0)
+ inline style : 1000
+==========================> links
+https://colorhunt.co/==> color hunt
+
+===========>
+goole fonts =>
+https://fonts.google.com/
+
+==> safe fonts ==>
+https://www.w3schools.com/cssref/css_websafe_fonts.php
+
+==============>
+Box Model ==>
+width , height , margin , padding,border
+
+
+====> margin collabse ==>
+same line ==> total
+diffrent lines ==> max between two
+
+
+==================>
+width ==> padding , border, content (left , right )
+height ==> padding , border (top , bottom)
+
+
+===>
+ display : inline , block
+block element ==> div ==> width
+inline elemnt ==> span ==> content
+================>
+width ==> content + padding+ border
+
+float 
+visibility :hidden
+opacity==> 0:1
+display:none
+background  image
+
+
+parent ==> 400 
+=================>
+box-sizing ===> content-box 
+width ==> content ==> 100
++ padding ==> 40px
+=============> 140px  ===> 3*140=420
+
+
+
+box-sizing ===> border-box ==>
+width 100 , padding 20 ==> 100 
+==============> 300px

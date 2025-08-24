@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Portal</title>
+  <!-- Import Inter font from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Import Tailwind CSS from CDN to avoid installation issues -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+  <!-- Import Lucide Icons from CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-inter">
+  <!-- Header -->
+  <header class="bg-white shadow">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-4">
+        <h1 class="text-xl font-bold text-blue-600">
+          <a href="#" id="home-link">Job Portal</a>
+        </h1>
+        <a href="#" class="flex items-center text-gray-700 hover:text-blue-600 transition-colors" id="job-search-link">
+          <i data-lucide="briefcase" class="w-5 h-5 mr-1"></i>
+          <span>Job Search</span>
+        </a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div id="user-info" class="hidden flex items-center space-x-2">
+          <i data-lucide="user" class="w-5 h-5 mr-2"></i>
+          <span class="text-gray-700" id="user-name-display"></span>
+          <span class="text-sm font-semibold text-blue-600" id="user-role-display"></span>
+          <button id="logout-button" class="flex items-center px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
+            <i data-lucide="log-out" class="w-5 h-5 mr-1"></i>
+            <span>Log out</span>
+          </button>
+        </div>
+        <a href="#" id="login-link" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+          Log In
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8" id="main-content"></main>
+
+  <script>
+    // Initialize Lucide Icons after the page loads
+    window.onload = function() {
+      lucide.createIcons();
+    };
+    
+    // Mock database (dummy data)
+    let currentUser = null;
+    let page = 'home';
+    let selectedJob = null;
+
+    const users = [
+      { id: 1, name: 'Candidate', email: 'candidate@test.com', role: 'candidate' },
+      { id: 2, name: 'Employer', email: 'employer@test.com', role: 'employer' },
+      { id: 3, name: 'Admin', email: 'admin@test.com', role: 'admin' },
+    ];
+
+    let jobs = [
+      {
+        id: 1,
+        title: 'Senior Software Engineer',
+        location: 'Cairo',
+        category: 'Technology',
+        description: 'We are looking for a senior software engineer to join our team. Must have extensive experience in software development...',
+        isApproved: true,
+        employerId: 2,
+      },
+      {
+        id: 2,
+        title: 'Marketing Manager',
+        location: 'Giza',
+        category: 'Marketing',
+        description: 'Join our marketing team to help manage advertising campaigns...',
+        isApproved: true,
+        employerId: 2,
+      },
+      {
+        id: 3,
+        title: 'Accountant',
+        location: 'Alexandria',
+        category: 'Finance',
+        description: 'We are looking for a qualified accountant to manage our company\'s financial records...',
+        isApproved: false,
+        employerId: 2,
+      },
+    ];
+
+    const applications = [
+      { id: 1, userId: 1, jobId: 1, status: 'pending' },
+    ];
+
+    const mainContent = document.getElementById('main-content');
+    const userInfo = document.getElementById('user-info');
+    const loginLink = document.getElementById('login-link');
+    const homeLink = document.getElementById('home-link');
+    const jobSearchLink = document.getElementById('job-search-link');
+    const userNameDisplay = document.getElementById('user-name-display');
+    const userRoleDisplay = document.getElementById('user-role-display');
+    const logoutButton = document.getElementById('logout-button');
+
+    // Function to navigate to a different page
+    const navigateTo = (newPage, data = null) => {
+      page = newPage;
+      selectedJob = data;
+      renderPage();
+    };
+
+    // Mock login function
+    const handleLogin = (role) => {
+      const user = users.find((u) => u.role === role);
+      currentUser = user;
+      userInfo.classList.remove('hidden');
+      loginLink.classList.add('hidden');
+      userNameDisplay.textContent = `Welcome, ${currentUser.name}`;
+      userRoleDisplay.textContent = `(${currentUser.role})`;
+      if (user.role === 'candidate') {
+        navigateTo('candidate-dashboard');
+      } else if (user.role === 'employer') {
+        navigateTo('employer-dashboard');
+      } else if (user.role === 'admin') {
+        navigateTo('admin-dashboard');
+      }
+    };
+
+    // Mock logout function
+    const handleLogout = () => {
+      currentUser = null;
+      userInfo.classList.add('hidden');
+      loginLink.classList.remove('hidden');
+      navigateTo('home');
+    };
+    
+    // Function to handle new user registration
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const email = e.target.elements['email'].value;
+        const name = e.target.elements['name'].value;
+        const role = e.target.elements['role'].value;
+        
+        // Simple validation to check if email already exists
+        const emailExists = users.some(user => user.email === email);
+        if (emailExists) {
+            alert('This email is already registered. Please use a different one.');
+            return;
+        }
+
+        // Add the new user to our mock database
+        const newUser = {
+            id: users.length + 1,
+            name: name,
+            email: email,
+            role: role
+        };
+        users.push(newUser);
+        
+        alert('Registration successful! You can now log in.');
+        navigateTo('home');
+    };
+
+    // Render Home Page
+    const renderHomePage = () => {
+      mainContent.innerHTML = `
+        <div class="text-center bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Welcome to the Job Portal</h2>
+          <p class="text-gray-600 mb-6">
+            Please select your role to log in or register.
+          </p>
+          <div class="flex justify-center space-x-4 mb-4">
+            <button onclick="handleLogin('candidate')" class="flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition-colors">
+              <i data-lucide="user" class="w-5 h-5 mr-2"></i>
+              <span>Log In as Candidate</span>
+            </button>
+            <button onclick="handleLogin('employer')" class="flex items-center px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors">
+              <i data-lucide="briefcase" class="w-5 h-5 mr-2"></i>
+              <span>Log In as Employer</span>
+            </button>
+            <button onclick="handleLogin('admin')" class="flex items-center px-6 py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition-colors">
+              <i data-lucide="settings" class="w-5 h-5 mr-2"></i>
+              <span>Log In as Admin</span>
+            </button>
+          </div>
+          <p class="text-gray-600">
+            Don't have an account? <a href="#" id="register-link" class="text-blue-600 hover:underline">Register here</a>
+          </p>
+        </div>
+      `;
+      document.getElementById('register-link').addEventListener('click', () => navigateTo('register'));
+      lucide.createIcons();
+    };
+    
+    // Render Registration Page
+    const renderRegisterPage = () => {
+        mainContent.innerHTML = `
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-lg mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Register a New Account</h2>
+                <form id="register-form" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required />
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required />
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="password" name="password" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required />
+                    </div>
+                    <div>
+                        <label for="role" class="block text-sm font-medium text-gray-700">Account Type</label>
+                        <select id="role" name="role" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required>
+                            <option value="candidate">Candidate</option>
+                            <option value="employer">Employer</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        Register
+                    </button>
+                </form>
+                <p class="mt-4 text-center text-gray-600">
+                    Already have an account? <a href="#" id="login-from-register" class="text-blue-600 hover:underline">Log in here</a>
+                </p>
+            </div>
+        `;
+        document.getElementById('register-form').addEventListener('submit', handleRegister);
+        document.getElementById('login-from-register').addEventListener('click', () => navigateTo('home'));
+        lucide.createIcons();
+    };
+    
+    // Render Candidate Dashboard
+    const renderCandidateDashboard = () => {
+      const appliedJobs = applications
+        .filter(app => app.userId === currentUser.id)
+        .map(app => jobs.find(job => job.id === app.jobId));
+      
+      let jobsHtml = '';
+      if (appliedJobs.length > 0) {
+        jobsHtml = appliedJobs.map(job => `
+          <li class="bg-gray-50 p-4 rounded-lg shadow-sm flex justify-between items-center">
+            <div>
+              <h4 class="font-bold text-gray-800">${job.title}</h4>
+              <p class="text-sm text-gray-500">Location: ${job.location}</p>
+            </div>
+            <span class="text-sm font-semibold text-blue-600">Pending Review</span>
+          </li>
+        `).join('');
+      } else {
+        jobsHtml = `<p class="text-gray-500 text-center">You have not applied for any jobs yet.</p>`;
+      }
+
+      mainContent.innerHTML = `
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Candidate Dashboard</h2>
+          <p class="text-gray-600 mb-4">Hello, ${currentUser.name}. This is your application history.</p>
+          <div class="mt-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Jobs Applied For</h3>
+            <ul class="space-y-4">${jobsHtml}</ul>
+          </div>
+        </div>
+      `;
+      lucide.createIcons();
+    };
+
+    // Render Employer Dashboard
+    const renderEmployerDashboard = () => {
+      const myJobs = jobs.filter(job => job.employerId === currentUser.id);
+
+      const jobListHtml = myJobs.length > 0
+        ? myJobs.map(job => `
+          <li class="bg-gray-50 p-4 rounded-lg shadow-sm flex justify-between items-center">
+            <div>
+              <h4 class="font-bold text-gray-800">${job.title}</h4>
+              <p class="text-sm text-gray-500">Status: ${job.isApproved ? 'Approved' : 'Pending'}</p>
+            </div>
+            <span class="text-sm font-semibold ${job.isApproved ? 'text-green-600' : 'text-yellow-600'}">
+              ${job.isApproved ? 'Approved' : 'Pending'}
+            </span>
+          </li>
+        `).join('')
+        : `<p class="text-gray-500 text-center">You have not posted any jobs yet.</p>`;
+
+      const createJobFormHtml = `
+        <div id="create-job-form-container" class="hidden bg-gray-50 p-6 rounded-lg shadow-inner mb-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Post a New Job</h3>
+          <form id="create-job-form" class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Job Title</label>
+              <input type="text" id="job-title" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Location</label>
+              <input type="text" id="job-location" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Category</label>
+              <input type="text" id="job-category" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Description</label>
+              <textarea id="job-description" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+              Post Job
+            </button>
+          </form>
+        </div>
+      `;
+
+      mainContent.innerHTML = `
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Employer Dashboard</h2>
+          <p class="text-gray-600 mb-4">Hello, ${currentUser.name}. These are the jobs you have posted.</p>
+          <div class="flex justify-end mb-4">
+            <button id="toggle-create-job-form" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
+              <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i>
+              <span>Post a New Job</span>
+            </button>
+          </div>
+          ${createJobFormHtml}
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">My Job Listings</h3>
+          <ul class="space-y-4">${jobListHtml}</ul>
+        </div>
+      `;
+
+      // Add JavaScript logic after rendering content
+      const createJobFormContainer = document.getElementById('create-job-form-container');
+      const toggleCreateJobFormBtn = document.getElementById('toggle-create-job-form');
+      const createJobForm = document.getElementById('create-job-form');
+
+      toggleCreateJobFormBtn.addEventListener('click', () => {
+        createJobFormContainer.classList.toggle('hidden');
+        if (createJobFormContainer.classList.contains('hidden')) {
+            toggleCreateJobFormBtn.querySelector('span').textContent = 'Post a New Job';
+        } else {
+            toggleCreateJobFormBtn.querySelector('span').textContent = 'Cancel';
+        }
+      });
+
+      createJobForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newJob = {
+          id: jobs.length + 1,
+          title: document.getElementById('job-title').value,
+          location: document.getElementById('job-location').value,
+          category: document.getElementById('job-category').value,
+          description: document.getElementById('job-description').value,
+          isApproved: false,
+          employerId: currentUser.id,
+        };
+        jobs.push(newJob);
+        navigateTo('employer-dashboard');
+      });
+      lucide.createIcons();
+    };
+
+    // Render Admin Dashboard
+    const renderAdminDashboard = () => {
+      const unapprovedJobs = jobs.filter(job => !job.isApproved);
+
+      let jobsHtml = '';
+      if (unapprovedJobs.length > 0) {
+        jobsHtml = unapprovedJobs.map(job => `
+          <li class="bg-gray-50 p-4 rounded-lg shadow-sm flex items-center justify-between">
+            <div>
+              <h4 class="font-bold text-gray-800">${job.title}</h4>
+              <p class="text-sm text-gray-500">${job.location} | ${job.category}</p>
+              <p class="text-sm text-gray-500 mt-1 line-clamp-2">${job.description}</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button onclick="handleApproveJob(${job.id})" class="p-2 text-green-600 hover:text-green-800 transition-colors" title="Approve">
+                <i data-lucide="check-circle" class="w-6 h-6"></i>
+              </button>
+              <button onclick="handleRejectJob(${job.id})" class="p-2 text-red-600 hover:text-red-800 transition-colors" title="Reject">
+                <i data-lucide="x-circle" class="w-6 h-6"></i>
+              </button>
+            </div>
+          </li>
+        `).join('');
+      } else {
+        jobsHtml = `<p class="text-gray-500 text-center">There are no jobs awaiting approval.</p>`;
+      }
+      
+      mainContent.innerHTML = `
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Admin Dashboard</h2>
+          <p class="text-gray-600 mb-4">Hello, ${currentUser.name}. These are the jobs awaiting approval.</p>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Jobs Awaiting Approval</h3>
+          <ul class="space-y-4">${jobsHtml}</ul>
+        </div>
+      `;
+      lucide.createIcons();
+    };
+
+    // Render Job Search Page
+    const renderJobSearch = () => {
+      const approvedJobs = jobs.filter(job => job.isApproved);
+      const locations = [...new Set(approvedJobs.map(job => job.location))];
+      const categories = [...new Set(approvedJobs.map(job => job.category))];
+
+      const locationOptions = locations.map(loc => `<option value="${loc}">${loc}</option>`).join('');
+      const categoryOptions = categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+
+      mainContent.innerHTML = `
+        <div>
+          <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Find Your Dream Job</h2>
+          <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <form id="search-form" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+              <div class="col-span-1 md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Keyword</label>
+                <div class="relative">
+                  <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                  <input type="text" id="keyword" class="w-full px-10 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:border-blue-500" placeholder="Job title, keywords..." />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                <div class="relative">
+                  <i data-lucide="map-pin" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                  <select id="location" class="w-full px-10 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:border-blue-500">
+                    <option value="">All Locations</option>
+                    ${locationOptions}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <div class="relative">
+                  <i data-lucide="tag" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                  <select id="category" class="w-full px-10 py-2 border rounded-lg focus:ring focus:ring-blue-200 focus:border-blue-500">
+                    <option value="">All Categories</option>
+                    ${categoryOptions}
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div id="job-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+      `;
+
+      const renderJobs = () => {
+        const keyword = document.getElementById('keyword').value.toLowerCase();
+        const location = document.getElementById('location').value;
+        const category = document.getElementById('category').value;
+
+        const filteredJobs = approvedJobs.filter(job => {
+          const matchesKeyword = job.title.toLowerCase().includes(keyword) || job.description.toLowerCase().includes(keyword);
+          const matchesLocation = location ? job.location === location : true;
+          const matchesCategory = category ? job.category === category : true;
+          return matchesKeyword && matchesLocation && matchesCategory;
+        });
+
+        const jobListHtml = filteredJobs.length > 0
+          ? filteredJobs.map(job => `
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+              <h3 class="text-xl font-bold text-gray-800 mb-2">${job.title}</h3>
+              <p class="text-gray-500 flex items-center mb-1">
+                <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i>
+                ${job.location}
+              </p>
+              <p class="text-gray-500 flex items-center mb-4">
+                <i data-lucide="tag" class="w-4 h-4 mr-2"></i>
+                ${job.category}
+              </p>
+              <p class="text-gray-600 text-sm mb-4 line-clamp-3">${job.description}</p>
+              <button onclick="navigateTo('job-details', ${job.id})" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                View Details
+              </button>
+            </div>
+          `).join('')
+          : `<div class="col-span-full text-center py-10 text-gray-500">
+              <p>No jobs found matching your criteria.</p>
+            </div>`;
+
+        document.getElementById('job-list').innerHTML = jobListHtml;
+        lucide.createIcons();
+      };
+
+      document.getElementById('keyword').addEventListener('input', renderJobs);
+      document.getElementById('location').addEventListener('change', renderJobs);
+      document.getElementById('category').addEventListener('change', renderJobs);
+
+      renderJobs();
+    };
+    
+    // Render Job Details Page
+    const renderJobDetails = () => {
+      const job = jobs.find(j => j.id === selectedJob);
+      if (!job) {
+        mainContent.innerHTML = `<div class="text-center text-gray-500">Job not found.</div>`;
+        return;
+      }
+      mainContent.innerHTML = `
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">${job.title}</h2>
+          <div class="flex items-center text-gray-600 mb-2">
+            <i data-lucide="map-pin" class="w-5 h-5 mr-2"></i>
+            <span class="font-semibold">${job.location}</span>
+          </div>
+          <div class="flex items-center text-gray-600 mb-6">
+            <i data-lucide="tag" class="w-5 h-5 mr-2"></i>
+            <span class="font-semibold">${job.category}</span>
+          </div>
+          <p class="text-gray-700 leading-relaxed mb-6">${job.description}</p>
+          <button onclick="handleApply()" class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition-colors">
+            Apply Now
+          </button>
+        </div>
+      `;
+      lucide.createIcons();
+    };
+
+    // Job management functions (for Admin)
+    const handleApproveJob = (jobId) => {
+      const jobIndex = jobs.findIndex(job => job.id === jobId);
+      if (jobIndex > -1) {
+        jobs[jobIndex].isApproved = true;
+      }
+      navigateTo('admin-dashboard');
+    };
+
+    const handleRejectJob = (jobId) => {
+      jobs = jobs.filter(job => job.id !== jobId);
+      navigateTo('admin-dashboard');
+    };
+
+    // Function to apply for a job
+    const handleApply = () => {
+      if (currentUser && currentUser.role === 'candidate') {
+        const hasApplied = applications.some(app => app.userId === currentUser.id && app.jobId === selectedJob);
+        if (hasApplied) {
+          alert("You have already applied for this job.");
+          return;
+        }
+        applications.push({
+          id: applications.length + 1,
+          userId: currentUser.id,
+          jobId: selectedJob,
+          status: 'pending'
+        });
+        alert("Your application has been submitted successfully!");
+      } else {
+        alert("You must be logged in as a candidate to apply.");
+      }
+    };
+    
+    // Bind main buttons to navigation functions
+    homeLink.addEventListener('click', () => navigateTo('home'));
+    jobSearchLink.addEventListener('click', () => navigateTo('job-search'));
+    logoutButton.addEventListener('click', handleLogout);
+
+    // Render the default page on load
+    renderPage = () => {
+      if (currentUser) {
+        userInfo.classList.remove('hidden');
+        loginLink.classList.add('hidden');
+      } else {
+        userInfo.classList.add('hidden');
+        loginLink.classList.remove('hidden');
+      }
+
+      switch (page) {
+        case 'home':
+          renderHomePage();
+          break;
+        case 'register':
+          renderRegisterPage();
+          break;
+        case 'candidate-dashboard':
+          renderCandidateDashboard();
+          break;
+        case 'employer-dashboard':
+          renderEmployerDashboard();
+          break;
+        case 'admin-dashboard':
+          renderAdminDashboard();
+          break;
+        case 'job-search':
+          renderJobSearch();
+          break;
+        case 'job-details':
+          renderJobDetails();
+          break;
+        default:
+          renderHomePage();
+      }
+    };
+
+    renderPage();
+  </script>
+</body>
+</html>

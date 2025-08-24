@@ -1,0 +1,101 @@
+===> MySql ===> DataBase  ===>  collection of related data
+===> Data   ==> strucured (numbers , text) . UnStructured (image , videos)
+==> Information  ===> data + process
+
+===============> file 
+
+id   name   salary  department
+1    ayaat 1000        os
+2    sara   2000       pd
+
+====> DBMS ==> Data Management System 
+Data ==> Software ==> 
+
+user ===> DBMS ===> DataBase 
+
+====> Enterprised model  
+====> Project Data Model 
+
+==================================> Planning Data ==> ERD 
+Entity RelationShip Diagram 
+
+Entity   ===> person , car 
+Strong Entity ===> regular   ==>  parents , course 
+Week Entity ===> entity depend on another entity 
+=====> chlidern ===> parents  
+
+=====> Person ===> atrributes ==> name , age , department , salary ,id
+====>  simple attribute   ===> salary
+*********************************************** KEY Types
+===> key attribute ==> attribute ==> repeat ==> ID   ===>(sigle key ) primary key   
+===> Foreign Key Attribute   ===> primary key ===> in another table 
+===> composite Key  ===> id , name
+
+
+
+
+====> Mutli value attribute ==> phone ===> 010 , 011
+===> composite attribute ===> name => fName , LName
+====> Derived Attribute ===> Attribute can calculated from another attribute
+Age , BD ===> 1/1/2000 ===> 25 
+
+
+
+
+RelationShip ===> relation contact between more than entity 
+====> degree of RelationShip
+
+===> unary   ===> (Recursive ) ===> RelationShip between entity and itself
+===> Binary
+===> Ternary 
+===> n-ary Relation
+
+====> cardinality ration    ====> الزاميه او لاه 
+
+===> one to one  ====> 1-emp mange 1-department
+===> one to many ====> 1-department  work m-emp
+====> many to many ===> m-emp   work  m-projects 
+
+
+===========================================================>
+====> tables  mapping  ==> RelationShip , Type of Attribute
+relation ==> 1-m ==> pk -> 1 put in table (many)
+m-m ===> new table ===> pk ==> two tables 
+1-1 ===> must ==> pk (must ) ==> table (may)
+1-1 (must)===> new table ==> 2 pk
+================> 
+attribute ==> multi values attribute 
+new table ==> attribute , pk (table)
+
+employee : name , ssn (key) , gender , BD , address,dep_num(fk),ssn_emp(fk)
+department : num (key)  , name  
+department_location : id , location , department_num(fk)==> num (dep)
+project : name , num (key) , location , dep-num (kk--> num:department)emp_projects : proj_num , emp_ssn , work_hours
+
+
+dependents: id,name , RelationShip, bd , name , emp_ssn(fk)
+
+==================>
+mapping ===> erd ==> table
+1- Entities ==> 
+department : num , name  
+ department_location : location , dep_num
+ employee  :firstName , lastName 
+ project :
+ dependents :
+ 2- atrributes ==> entities ===> multi valued attribute 
+ ====> new table ==> atrribute , pk of table 
+ location ==> multi valued attribute
+
+ department_location : location , dep_num
+
+ 3- relation  between entities 
+ 1-1 ===> must , may ==> pk must ==> fk table of may
+1-1 ==. must - must ==> pk of any table in another table
+1-1 ==> may - may ==> new table => pks of two tables 
+
+=============>
+1-m ==> pk of 1 put it in table of M 
+=====>
+m-m  ==> new table => pks of two tables 
+

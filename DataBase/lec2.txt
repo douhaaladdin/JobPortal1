@@ -1,0 +1,161 @@
+====> DB ===> tables ==> mapping ==> real DataBase
+
+====> software  ==> 
+xamp  => https://www.apachefriends.org/download.html
+ laragon => https://laragon.org/download 
+
+
+ ============> sql  ===> standared query language 
+ ====> query ==> quires 
+
+
+ ========================>
+ 1- Create DataBase ==> Create database dbName 
+ ===> Create database iti_summer_2025_g1
+2- delete, drop database ==> drop database bdName
+====> drop database iti_summer_2025_g1
+
+*********************************  tables
+ 2- Create tables ===> 1- you must enter in Db 
+ Create table tableName (columns of table) 
+ ===> Create table department (id int primary key  , name varchar (50), not null)
+ primary key ===> unique , not null 
+ auto increment ==> default value ==> 1 
+
+
+ 2- CREATE TABLE department_location (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    location VARCHAR(60),
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES department(id)
+);
+
+3- CREATE TABLE employee (
+    ssn INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(60),
+    address VARCHAR(60),
+    gender emun("male","female")
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES department(id),
+    emp_ssn INT,
+    FOREIGN KEY (emp_ssn) REFERENCES employee(ssn)
+);
+
+============>project : name , num (key) , location , dep-num 
+4-CREATE TABLE project (
+    num INT PRIMARY KEY AUTO_INCREMENT,
+      name VARCHAR(60),
+    location VARCHAR(60),
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES department(id)
+);
+=====================> employee project
+5- CREATE TABLE employee_project (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    project_num INT,
+    FOREIGN KEY (project_num) REFERENCES project(num),
+    emp_ssn INT,
+    FOREIGN KEY (emp_ssn) REFERENCES employee(ssn)
+);
+
+=======================> dependants
+6- CREATE TABLE dependants (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(60),
+    BD date,
+    gender enum("male","female"),
+    relation_ship VARCHAR(60),
+    emp_ssn INT,
+    FOREIGN KEY (emp_ssn) REFERENCES employee(ssn)
+);
+
+************************* delete table 
+drop table table name
+
+
+
+******************************  insert data in table 
+
+insert into department (id , name) values(3,"mearn")
+===> id ==> auto increment ==> insert into department ( name) values("mearn")
+
+
+*******************  select data from table
+ ==> select all data => select * from department
+ ==> select specific column ==> SELECT name from department;
+
+ ====> table select columns ==> with another name ==> alias
+
+SELECT name  as department_name from department ;
+
+====> select ==> by condition 
+SELECT name  as department_name from department where id > 1;
+SELECT id as department_num, name as department_name from department where id > 1;
+SELECT id , name  from department where id > 1;
+
+condition in range 
+
+SELECT id , name  from department where id  between 2 and 4;==>2,3,4
+SELECT id , name  from department where id  in (2 , 4); ===> 2,4
+
+***************************************** select data by order ==> desc , asc  ===> defulat 
+SELECT * FROM `employee` ORDER by ssn DESC;
+
+
+=========================================> update data in table 
+update employee set name ="ayaat"  ===> name ==> values ==> ayaat
+
+====> update ==> condition 
+update employee set name ="ayaat" where id=1
+
+
+==========> and , or , not 
+and ==>  two condition = true 
+update employee set BD="2000-08-12" where name="ayaat" and ssn=1
+
+or ==> on of two conditions is true
+update employee set BD="2000-08-10" where name="ayaat" or ssn=5
+
+not ==> not id =1 ==> any id except 1
+
+====================================>
+
+aggregiation functions ==> min , max , avg , sum , count
+
+select sum(ssn) from employee
+select sum(ssn) as sum_ssn from employee
+
+select min(ssn) from employee
+select min(ssn) as min_ssn from employee
+
+select max(ssn) from employee
+select max(ssn) as max_ssn from employee
+
+select count(ssn) from employee
+select count(ssn) as count_ssn from employee
+
+select avg(ssn) from employee
+select avg(ssn) as avg_ssn from employee
+
+
+====================> like 
+select * from name where name like "a%"  ==> start with a
+select * from name where name like "%a%"  ==> a is in center
+select * from name where name like "%a"  ==>end with a
+
+
+
+====================================> update strucure of table ===> column ===> alter
+
+-- add colum in table emp_projects work_hours
+alter table employee_project add hours int default 0
+
+---> delete column
+alter table employee_project drop column test
+
+
+=========> add constrain colum ==> nuique , not null
+alter table project add constraint uniqueName unique (name)
+
+=========> rename table 
+Alter table employee_project rename to emp_projects

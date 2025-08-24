@@ -1,0 +1,57 @@
+===> generate controller students ==> id , name , address , image
+and handle all functions ==> index , show , destroy ,edit
+
+=================> 
+controller ==> track   ==> id,name , description , image
+index , show , destroy  , edit
+
+
+===========> bonous==>  edit 
+
+
+=========================> steps ==> install sql ==>. laragon 
+start , database ==> php myadmin ==> username , password 
+create database ===> 
+===> project  ==> .env ==> dbtype====
+============================>
+terminal ==> cd projectName 
+
+===> php artisan migrate
+===> php artisan serve 
+
+
+===================================> Day3
+migration
+id , name , address , image,email,gender,phone ==> student
+id , name , image,description ==> student
+componet ==> navbar , buttons , bootstrap 
+==> functions ===> update , delete 
+==> views ==> update by new data 
+
+
+======================================= Day4
+handle validation and pagination in table student and track
+handle relation between student , track  ==> show student track Name , show track all students
+
+=================> new table courses  ==> id , name , image , description , code  
+
+student course ==> student take many course
+student course ==> course has many student
+
+track  course==> track has one course
+track  course==> course in many tracks
+================>
+show of students ==> show all courses 
+show course ===> show all students take install
+
+
+===================>
+show of tracks ==> show all courses 
+show course ===> show all tracks take install
+======================================================>
+api ==> student controller   ============> middleware 
+api ==> track controller     ============> middleware 
+api ==> course controller     ============> middleware 
+====> handel code image ==> uer upload image 
+
+
